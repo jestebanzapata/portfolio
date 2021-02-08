@@ -1,7 +1,34 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import styles from '../styles/Home.module.css'
+import { Article } from '../components/Article/Article.component';
 
 export default function Home() {
+
+  const [articles, setArticles] = useState([
+    {
+      title: 'Nostrud sunt consequat id sint.',
+      date: '02/02/2021',
+      shortDescription: 'Culpa ipsum aliquip reprehenderit eu duis in cupidatat et. Nisi ipsum aute pariatur amet labore ullamco proident tempor. Et sit cupidatat exercitation sint velit nostrud in aliquip quis deserunt. Mollit ipsum eu laborum reprehenderit adipisicing consectetur ad excepteur et cillum proident labore commodo. Exercitation non duis sit eu deserunt eiusmod aliquip quis eiusmod. Irure nisi in tempor adipisicing dolor cillum minim quis nulla et est cupidatat magna exercitation. Sit amet minim est commodo.',
+      categories: ["Tech", "Games", "Tech", "Games", "Tech", "Games"],
+      //thumbnail: 'https://www.dafont.com/forum/attach/orig/5/6/561721.jpg'
+    },
+    {
+      title: 'Nostrud sunt consequat id sint.',
+      date: '02/02/2021',
+      shortDescription: 'Culpa ipsum aliquip reprehenderit eu duis in cupidatat et. Nisi ipsum aute pariatur amet labore ullamco proident tempor. Et sit cupidatat exercitation sint velit nostrud in aliquip quis deserunt. Mollit ipsum eu laborum reprehenderit adipisicing consectetur ad excepteur et cillum proident labore commodo. Exercitation non duis sit eu deserunt eiusmod aliquip quis eiusmod. Irure nisi in tempor adipisicing dolor cillum minim quis nulla et est cupidatat magna exercitation. Sit amet minim est commodo.',
+      categories: ["Tech", "Games", "Tech", "Games", "Tech", "Games"],
+      //thumbnail: 'https://www.dafont.com/forum/attach/orig/5/6/561721.jpg'
+    },
+    {
+      title: 'Nostrud sunt consequat id sint.',
+      date: '02/02/2021',
+      shortDescription: 'Culpa ipsum aliquip reprehenderit eu duis in cupidatat et. Nisi ipsum aute pariatur amet labore ullamco proident tempor. Et sit cupidatat exercitation sint velit nostrud in aliquip quis deserunt. Mollit ipsum eu laborum reprehenderit adipisicing consectetur ad excepteur et cillum proident labore commodo. Exercitation non duis sit eu deserunt eiusmod aliquip quis eiusmod. Irure nisi in tempor adipisicing dolor cillum minim quis nulla et est cupidatat magna exercitation. Sit amet minim est commodo.',
+      categories: ["Tech", "Games", "Tech", "Games", "Tech", "Games"],
+      //thumbnail: 'https://www.dafont.com/forum/attach/orig/5/6/561721.jpg'
+    }
+  ])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -9,57 +36,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      {
+        articles && articles.map(({title, date, categories, shortDescription, thumbnail}) => 
+        <Article title={title} date={date}  categories={categories} shortDescription={shortDescription} thumbnail={thumbnail}></Article>)
+      }
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
