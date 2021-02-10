@@ -7,9 +7,13 @@ import Link from 'next/link'
 interface ArticleProps {
     title: string;
     date: Date;
-    categories: string[];
+    tags: {
+        id: number;
+        name: string;
+    }[];
     shortDescription: string;
     thumbnail: string;
+    slug: string;
 }
 
 
@@ -17,8 +21,9 @@ export const Article: React.FC<ArticleProps> = ({
     title,
     date,
     shortDescription,
-    categories,
-    thumbnail
+    tags,
+    thumbnail,
+    slug
 }) => {
         return (
             <StyledArticle>
@@ -27,9 +32,9 @@ export const Article: React.FC<ArticleProps> = ({
                 <h2>{title}</h2>
                 <p>{shortDescription}</p>
                 <div>
-                    {categories && categories.map(category => <Chip value={category}/>)}
+                    {tags && tags.map((tag, index) => <Chip key={index} value={tag.name}/>)}
                 </div>
-                <Link href="/article/1">
+                <Link href={`/article/${slug}`}>
                     <a>Leer Mas...</a>
                 </Link>
 

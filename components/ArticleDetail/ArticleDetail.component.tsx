@@ -7,14 +7,17 @@ interface ArticleDetailProps {
     title: string;
     date: string;
     content: string;
-    categories: string[];
+    tags: {
+        id: number;
+        name: string;
+    }[];
 }
 
 export const ArticleDetail: React.FC<ArticleDetailProps> = ({
     title,
     date,
     content,
-    categories
+    tags
 }) => {
     
     
@@ -23,7 +26,7 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
             <h1>{title}</h1>
             <div>
             {
-                    categories && categories.map(category => <Chip value={category}/>)
+                    tags && tags.map(tag => <Chip key={tag.id} value={tag.name}/>)
             }
             </div>
             <div className="content" dangerouslySetInnerHTML={{__html: content}}/> 

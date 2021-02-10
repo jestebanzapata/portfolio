@@ -1,34 +1,12 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState } from 'react';
 import styles from '../styles/Home.module.css'
 import { Article } from '../components/Article/Article.component';
+import fetch from 'isomorphic-unfetch';
 
-export default function Home() {
+export default function Home({articles}) {
 
-  const [articles, setArticles] = useState([
-    {
-      title: 'Nostrud sunt consequat id sint.',
-      date: '02/02/2021',
-      shortDescription: 'Culpa ipsum aliquip reprehenderit eu duis in cupidatat et. Nisi ipsum aute pariatur amet labore ullamco proident tempor. Et sit cupidatat exercitation sint velit nostrud in aliquip quis deserunt. Mollit ipsum eu laborum reprehenderit adipisicing consectetur ad excepteur et cillum proident labore commodo. Exercitation non duis sit eu deserunt eiusmod aliquip quis eiusmod. Irure nisi in tempor adipisicing dolor cillum minim quis nulla et est cupidatat magna exercitation. Sit amet minim est commodo.',
-      categories: ["Tech", "Games", "Tech", "Games", "Tech", "Games"],
-      //thumbnail: 'https://www.dafont.com/forum/attach/orig/5/6/561721.jpg'
-    },
-    {
-      title: 'Nostrud sunt consequat id sint.',
-      date: '02/02/2021',
-      shortDescription: 'Culpa ipsum aliquip reprehenderit eu duis in cupidatat et. Nisi ipsum aute pariatur amet labore ullamco proident tempor. Et sit cupidatat exercitation sint velit nostrud in aliquip quis deserunt. Mollit ipsum eu laborum reprehenderit adipisicing consectetur ad excepteur et cillum proident labore commodo. Exercitation non duis sit eu deserunt eiusmod aliquip quis eiusmod. Irure nisi in tempor adipisicing dolor cillum minim quis nulla et est cupidatat magna exercitation. Sit amet minim est commodo.',
-      categories: ["Tech", "Games", "Tech", "Games", "Tech", "Games"],
-      //thumbnail: 'https://www.dafont.com/forum/attach/orig/5/6/561721.jpg'
-    },
-    {
-      title: 'Nostrud sunt consequat id sint.',
-      date: '02/02/2021',
-      shortDescription: 'Culpa ipsum aliquip reprehenderit eu duis in cupidatat et. Nisi ipsum aute pariatur amet labore ullamco proident tempor. Et sit cupidatat exercitation sint velit nostrud in aliquip quis deserunt. Mollit ipsum eu laborum reprehenderit adipisicing consectetur ad excepteur et cillum proident labore commodo. Exercitation non duis sit eu deserunt eiusmod aliquip quis eiusmod. Irure nisi in tempor adipisicing dolor cillum minim quis nulla et est cupidatat magna exercitation. Sit amet minim est commodo.',
-      categories: ["Tech", "Games", "Tech", "Games", "Tech", "Games"],
-      //thumbnail: 'https://www.dafont.com/forum/attach/orig/5/6/561721.jpg'
-    }
-  ])
-
+  console.log(articles);
   return (
     <div className={styles.container}>
       <Head>
@@ -37,10 +15,22 @@ export default function Home() {
       </Head>
 
       {
-        articles && articles.map(({title, date, categories, shortDescription, thumbnail}) => 
-        <Article title={title} date={date}  categories={categories} shortDescription={shortDescription} thumbnail={thumbnail}></Article>)
+        articles && articles.map(({title, date, tags, shortDescription, thumbnail, slug}, index) => 
+        <Article key={index+slug} title={title} date={date}  tags={tags.map(tag => ({id: tag.id, name: tag.name}))} shortDescription={shortDescription} thumbnail={thumbnail} slug={slug}></Article>)
       }
 
     </div>
   )
+}
+
+
+export async function getStaticProps(){
+  const url = process.env.API_URL;
+  const res = await fetch(`${url}/articles`);
+  const articles = await res.json();
+  return {
+    props:{
+      articles
+    }
+  }
 }
