@@ -5,17 +5,18 @@ import { StyledArticleDetail } from './ArticleDetail.style';
 
 interface ArticleDetailProps {
     title: string;
-    date: string;
+    publishedAt: string;
     content: string;
     tags: {
         id: number;
         name: string;
+        color?: string;
     }[];
 }
 
 export const ArticleDetail: React.FC<ArticleDetailProps> = ({
     title,
-    date,
+    publishedAt,
     content,
     tags
 }) => {
@@ -24,9 +25,10 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
     return (
         <StyledArticleDetail>
             <h1>{title}</h1>
+            <div><strong>Fecha:</strong><span>{publishedAt}</span></div>
             <div>
             {
-                    tags && tags.map(tag => <Chip key={tag.id} value={tag.name}/>)
+                    tags && tags.map(tag => <Chip key={tag.id} value={tag.name} color={tag.color}/>)
             }
             </div>
             <div className="content" dangerouslySetInnerHTML={{__html: content}}/> 

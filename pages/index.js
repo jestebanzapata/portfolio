@@ -16,7 +16,7 @@ export default function Home({articles}) {
 
       {
         articles && articles.map(({title, date, tags, shortDescription, thumbnail, slug}, index) => 
-        <Article key={index+slug} title={title} date={date}  tags={tags.map(tag => ({id: tag.id, name: tag.name}))} shortDescription={shortDescription} thumbnail={thumbnail} slug={slug}></Article>)
+        <Article key={index+slug} title={title} date={date}  tags={tags.map(tag => ({id: tag.id, name: tag.name, color: tag.color}))} shortDescription={shortDescription} thumbnail={thumbnail} slug={slug}></Article>)
       }
 
     </div>

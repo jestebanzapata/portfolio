@@ -21,11 +21,11 @@ export const StyledChip = styled.div(
         align-items: center;
         width: fit-content;
         height:30px;
-        color: #1976d2;
-        border: 1px solid #1976d2;
+        color: #eeeeee;
+        border-left: 10px solid ${color ? color: "gray"};
+        background: black;
         
         margin: 2px;
-        border-radius: 15px;
         font-size: ${handleFontSize(size)};
 
         span {

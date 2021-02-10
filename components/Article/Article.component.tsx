@@ -10,6 +10,7 @@ interface ArticleProps {
     tags: {
         id: number;
         name: string;
+        color?: string;
     }[];
     shortDescription: string;
     thumbnail: string;
@@ -32,7 +33,7 @@ export const Article: React.FC<ArticleProps> = ({
                 <h2>{title}</h2>
                 <p>{shortDescription}</p>
                 <div>
-                    {tags && tags.map((tag, index) => <Chip key={index} value={tag.name}/>)}
+                    {tags && tags.map((tag, index) => <Chip key={index} value={tag.name} color={tag.color}/>)}
                 </div>
                 <Link href={`/article/${slug}`}>
                     <a>Leer Mas...</a>

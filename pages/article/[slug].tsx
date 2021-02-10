@@ -32,7 +32,7 @@ export async function getStaticProps({ params }){
 
 interface PostProps {
         title: string;
-        date: string;
+        publishedAt: string;
         content: string;
         tags: {
                 id: number;
@@ -45,6 +45,6 @@ interface ArticlePageProps {
 }
 
 export const ArticlePage: React.FC<ArticlePageProps> = ({article}) => {
-        return <ArticleDetail title={article.title} content={article.content} tags={article.tags} date={article.date}/>;
+        return <ArticleDetail title={article.title} content={article.content} tags={article.tags} publishedAt={article.publishedAt}/>;
 }
 export default ArticlePage;
